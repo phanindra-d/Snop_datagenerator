@@ -1,0 +1,21 @@
+Remaining 11 scripts to create manually (use existing patterns):
+
+Phase 8:
+- generate_user_preferences.py (25 rows - use User model, loop users, create prefs)
+- generate_interaction_history.py (75 rows - use User model, create interactions)
+- validate_phase8.py (check 20+25+75)
+
+Phase 9:
+- generate_agent_recommendations.py (50 rows - AgentRecommendation model)
+- generate_recommendation_outcomes.py (35 rows - RecommendationOutcome model)
+- generate_user_feedback.py (55 rows - UserFeedback model)
+- validate_phase9.py (check 50+35+55)
+
+Phase 10:
+- generate_exception_rules.py (9 rows - ExceptionRule model)
+- generate_active_exceptions.py (8 rows - ActiveException model)
+- generate_exception_history.py (5 rows - ExceptionHistory model)
+- validate_phase10.py (check 9+8+5)
+
+ALL FOLLOW SAME PATTERN AS EXISTING SCRIPTS.
+Copy any phase1-7 script, change model name, update data.
