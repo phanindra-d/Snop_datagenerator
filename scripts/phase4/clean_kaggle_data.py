@@ -43,7 +43,7 @@ def clean_kaggle_data():
     # Aggregate daily → monthly
     if 'date' in df.columns and 'units_sold' in df.columns:
         df['month'] = df['date'].dt.to_period('M')
-        monthly = df.groupby(['month', 'product', 'region'])['units_sold'].sum().reset_index()
+        monthly = df.groupby(['month', 'medicine', 'region'])['units_sold'].sum().reset_index()
     else:
         monthly = df  # Use as-is if columns don't match
 
