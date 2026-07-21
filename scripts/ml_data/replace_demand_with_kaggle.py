@@ -125,6 +125,14 @@ def delete_existing_demand_plans(session):
     count_query = text("SELECT COUNT(*) FROM demand_plans WHERE plan_type = 'HISTORICAL'")
     count_before = session.execute(count_query).scalar()
 
+    delete_provenance_query = text("""
+        DELETE FROM demand_provenance
+        WHERE demand_plan_id IN (
+            SELECT id FROM demand_plans WHERE plan_type = 'HISTORICAL'
+        )
+    """)
+    session.execute(delete_provenance_query)
+
     delete_query = text("DELETE FROM demand_plans WHERE plan_type = 'HISTORICAL'")
     session.execute(delete_query)
     session.commit()
@@ -268,7 +276,7 @@ def main():
     print("=" * 60)
 
     # Check if Kaggle CSV exists
-    kaggle_csv = 'data/raw/global_pharmacy_sales_2020_2025.csv'
+    kaggle_csv = 'data/processed/pharmacy_sales_monthly.csv'
 
     if not os.path.exists(kaggle_csv):
         print(f"\n✗ Kaggle CSV not found at: {kaggle_csv}")
