@@ -95,8 +95,6 @@ def generate_monthly_demand_plans(session, year=2026, months=[1,2,3,4]):
             :id, :item_id, :location_id, :period_start, :period_end,
             :quantity, :plan_type, :created_by, :is_active, NOW(), NOW()
         )
-        ON CONFLICT (item_id, location_id, period_start, plan_type) DO UPDATE
-        SET quantity = EXCLUDED.quantity, updated_at = NOW()
     """)
 
     for record in records:
@@ -207,12 +205,6 @@ def generate_weekly_actuals(session, year=2026):
             :week_number, :forecast_quantity, :actual_quantity, :deviation_pct,
             :is_surge, :created_by, :is_active, NOW(), NOW()
         )
-        ON CONFLICT (item_id, location_id, week_start_date) DO UPDATE
-        SET
-            actual_quantity = EXCLUDED.actual_quantity,
-            deviation_pct = EXCLUDED.deviation_pct,
-            is_surge = EXCLUDED.is_surge,
-            updated_at = NOW()
     """)
 
     for record in records:
