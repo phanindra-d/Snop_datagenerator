@@ -80,6 +80,7 @@ def generate_monthly_demand_plans(session, year=2026, months=[1,2,3,4]):
                 'location_id': combo.location_id,
                 'period_start': period_start,
                 'period_end': period_end,
+                'bucket_type': 'MONTHLY',
                 'quantity': quantity,
                 'plan_type': 'HISTORICAL',
                 'created_by': 'generate_2026_data.py',
@@ -90,10 +91,10 @@ def generate_monthly_demand_plans(session, year=2026, months=[1,2,3,4]):
     insert_query = text("""
         INSERT INTO demand_plans (
             id, item_id, location_id, period_start, period_end,
-            quantity, plan_type, created_by, is_active, created_at, updated_at
+            bucket_type, quantity, plan_type, created_by, is_active, created_at, updated_at
         ) VALUES (
             :id, :item_id, :location_id, :period_start, :period_end,
-            :quantity, :plan_type, :created_by, :is_active, NOW(), NOW()
+            :bucket_type, :quantity, :plan_type, :created_by, :is_active, NOW(), NOW()
         )
     """)
 
